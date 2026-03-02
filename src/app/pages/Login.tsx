@@ -12,7 +12,10 @@ export default function Login() {
   const [showAppeal, setShowAppeal] = useState(false);
   const [appealMessage, setAppealMessage] = useState('');
 
-  const handleLogin = async (e: React.FormEvent) => {
+  // আপনার দেওয়া লোগো লিঙ্ক
+  const logoUrl = "https://i.ibb.co.com/7NrCcJLB/3458025-splash.png";
+
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
@@ -54,7 +57,8 @@ export default function Login() {
     try {
       const result = await submitAppeal(username, appealMessage);
       if (result.success) {
-        alert('আপনার আবেদন পাঠানো হয়েছে। অনুমোদনের অপেক্ষায় রয়েছে।');
+        // UI alerting mechanism as per instruction (no browser alert)
+        setError('আপনার আবেদন পাঠানো হয়েছে। অনুমোদনের অপেক্ষায় রয়েছে।');
         setShowAppeal(false);
         setAppealMessage('');
       } else {
@@ -67,19 +71,25 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-50 to-orange-50 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-50 to-orange-50 p-4 font-sans">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
-              <svg className="w-10 h-10 text-red-600" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
-              </svg>
+            {/* SVG এর পরিবর্তে এখানে PNG লোগো বসানো হয়েছে */}
+            <div className="inline-flex items-center justify-center w-20 h-20 mb-4">
+              <img 
+                src={logoUrl} 
+                alt="Logo" 
+                className="w-full h-full object-contain"
+                onError={(e) => {
+                    e.target.src = "https://via.placeholder.com/80?text=SSF";
+                }}
+              />
             </div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
               সমাজতান্ত্রিক ছাত্র ফ্রন্ট
             </h1>
-            <p className="text-gray-600">প্রগ্রেস ট্র্যাকিং সিস্টেম</p>
+            <p className="text-gray-600 font-medium">প্রগ্রেস ট্র্যাকিং সিস্টেম</p>
           </div>
 
           {!showAppeal ? (
@@ -94,7 +104,7 @@ export default function Login() {
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all"
                     placeholder="আপনার ইউজারনেম লিখুন"
                     required
                   />
@@ -111,7 +121,7 @@ export default function Login() {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all"
                     placeholder="আপনার পাসওয়ার্ড লিখুন"
                     required
                   />
@@ -119,8 +129,8 @@ export default function Login() {
               </div>
 
               {error && (
-                <div className="flex items-center gap-2 p-3 bg-red-50 text-red-800 rounded-lg">
-                  <AlertCircle className="w-5 h-5" />
+                <div className={`flex items-start gap-2 p-3 rounded-lg ${error.includes('পাঠানো হয়েছে') ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
+                  <AlertCircle className="w-5 h-5 mt-0.5 flex-shrink-0" />
                   <span className="text-sm">{error}</span>
                 </div>
               )}
@@ -128,16 +138,16 @@ export default function Login() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
               >
                 {loading ? 'লগইন হচ্ছে...' : 'লগইন করুন'}
               </button>
 
-              <div className="text-center">
+              <div className="text-center pt-2">
                 <button
                   type="button"
                   onClick={() => navigate('/register')}
-                  className="text-red-600 hover:text-red-700 font-medium"
+                  className="text-red-600 hover:text-red-700 font-semibold text-sm transition-colors border-b border-transparent hover:border-red-600"
                 >
                   নতুন অ্যাকাউন্ট তৈরি করুন
                 </button>
@@ -145,9 +155,9 @@ export default function Login() {
             </form>
           ) : (
             <div className="space-y-6">
-              <div className="text-center p-4 bg-yellow-50 rounded-lg">
+              <div className="text-center p-4 bg-yellow-50 rounded-lg border border-yellow-100">
                 <AlertCircle className="w-12 h-12 text-yellow-600 mx-auto mb-2" />
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-gray-700 font-medium">
                   আপনার অ্যাকাউন্ট ব্লক করা হয়েছে। আপনি একবার আবেদন করতে পারবেন।
                 </p>
               </div>
@@ -159,23 +169,26 @@ export default function Login() {
                 <textarea
                   value={appealMessage}
                   onChange={(e) => setAppealMessage(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all"
                   rows={4}
                   placeholder="কেন আপনার অ্যাকাউন্ট আনব্লক করা উচিত তা লিখুন..."
                   required
                 />
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={handleAppeal}
-                  className="flex-1 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors"
+                  className="flex-1 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 active:scale-[0.98] transition-all shadow-md"
                 >
                   আবেদন পাঠান
                 </button>
                 <button
-                  onClick={() => setShowAppeal(false)}
-                  className="flex-1 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-colors"
+                  onClick={() => {
+                      setShowAppeal(false);
+                      setError('');
+                  }}
+                  className="flex-1 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 active:scale-[0.98] transition-all"
                 >
                   বাতিল
                 </button>
