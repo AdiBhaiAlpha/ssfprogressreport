@@ -1,0 +1,54 @@
+
+সমাজতান্ত্রিক ছাত্র ফ্রন্টের সদস্যদের প্রত্যেকের মান্থলি এক্টিভিটি ও প্রগ্রেস রিপোর্ট আমরা যারা সভাপতি ও সেক্রিরেটারি তারা রিপোর্ট তৈরী করার জন্য একটা ও্যেবসাইট চাই। সভাপতি ও সেক্রেটারি শুধু বাকিদের রিপোর্ট তৈরী করতে পারবে। সদস্যরা শুধু সেখানে একাউন্ট তৈরী করে তাদের প্রগ্রেস রিপোর্ট দেখতে পাবে।
+
+রিপোরটে যেসব তথ্যের পারসেন্টিজ উল্লেখ থাকবে ও কাউন্ট করা হবে সেগুলো হলঃ
+উপস্থিতিঃ মোট যেকয়দিন প্রোগ্রাম তার মধ্যে যেকয়দিন উপস্থিত সেই সংখ্যা দ্বারা তার উপস্থিতির পারসেন্টিজ অটো জেনারেট হবে।
+তাত্বিক ও আদর্শিক বোঝাপড়াঃ তার প্রতি মাসের উন্নতি রিপোর্ট করা হবে, এজন্য কোন পারসেন্ট থাকবে না জাস্ট একটা প্রগ্রেস লাইন থাকবে যা সরবোচ্চ স্ক্রিনের  বাম থেকে ডান অব্দি থাকবে, পেইজের বাইরে চলে যেতে থাকলে পেইজের ভিতরে এটাকে আনুপাতিক হারে কমিয়ে আনা হবে, বোঝাপড়া প্রতি মাসে কতটা উন্নত হয়েছে তা সভাপতি বা সেক্রেটারি কয়েকটি অপশন দ্বারা মডিফাই করবে যেমন সামান্য, একটু ভালো, মোটামোটি ভালোই, যথেস্ট ভালো, তুলনামুলক উন্নত, অনেকটা উন্নত এমন। এগুলার দ্বারাই হিসাব করে এই প্রগ্রেস লাইন আইডিয়া কিভাবে সাক্সেস করা যায় তা ভেবে তৈরী করবে। আমি শুধু তাদের দেখাতে চাই কে কার থেকে এই মাসে বোঝাপড়ায় এগিয়ে আছে আর কতটা 
+সংগঠনের মন্তব্যঃ সভাপতি ও সেক্রেটারি উভয়েই মন্তব্য করতে পারবে।
+
+সভাপতির নামঃ তানজিল হোসেন মুণিম
+সেল্ক্রেটারিঃ চিত্রণ ভট্টাচার্য আদি
+উভয়ের ছবি তারা তাদের আইডি থেকে যোগ বা মডিফাই বা রিমুভ করতে পারবে। যাদের ছবি থাকবে না তাদের ডিফল্ট পিকচার হবে ফেসবুকের ডিফল্ট  ইউজার প্রফাইল পিকচারের এসভিজি আইকন টা ।
+
+সভাপতির আইডি ল্পগইন ডিটেইলসঃusername: president@ssfmym, pass: munim
+secretary username: gs@ssfmym , pass: adi
+they can change it anytime from their settings. no old passsword required if logged in before from that device.
+
+the most rated user will be highlited. else will be shown sort by their score.
+users can create accouunt and that account will be sent to president and gs both for vverification, if one of them verify it then that user can be able to acccess their acccount, else / if cancelled verification that user will be blocked from accessing this site, he just can contact for help and write a request for the last time. if review is written it will be sent to pres. or gs and if they accept his user creation request his account will be verified and automatically unblocked.
+
+user just can see their progress and others profile and their progress, can change own details without name.
+
+the website will use separated json files as its database instead of mysql. create this site in php language.
+
+the site structure should be:
+ssf-progress-tracker/
+├── index.php
+├── login.php
+├── logout.php
+├── register.php
+├── dashboard.php
+├── profile.php
+├── admin/
+│   ├── dashboard.php
+│   ├── verify_users.php
+│   ├── manage_reports.php
+│   └── settings.php
+├── includes/
+│   ├── config.php
+│   ├── functions.php
+│   ├── auth.php
+│   └── db_handler.php
+├── data/
+│   ├── users.json
+│   ├── progress_reports.json
+│   ├── verification_requests.json
+│   └── appeal_requests.json
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── main.js
+│   └── uploads/
+│       └── profiles/
+└── .htaccess
